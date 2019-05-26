@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "7"
+services:
+  - docker
+
+after_success:
+  - docker build -t thisminute/website .
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin
+  - docker push thisminute/website
